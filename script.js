@@ -1,21 +1,21 @@
 const timerElement = document.getElementById("time-remaining");
 const timerView = document.getElementById("timer");
-const highScoreView = document.getElementById("#highscores");
+const highScoreView = document.querySelector("#highscores");
 const startButton = document.getElementById("start-quiz");
 
-const mainElement = document.getElementById("#main-content");
-const messageElement = document.getElementById("h1");
+const mainElement = document.querySelector("#main-content");
+const messageElement = document.querySelector("h1");
 const textElement = document.getElementById("p");
 
 const choicesListElement = document.getElementById("choices-list");
 const indicatorElement = document.getElementById("indicator");
 
-const formElement = document.getElementById("div");
-const highscorcesElement = document.getElementById("div");
-const textInputElement = document.getElementById("input");
-const formButton = document.getElementById("button");
-const backButton = document.getElementById("button");
-const clearButton = document.getElementById("button");
+const formElement = document.createElement("div");
+const highscorcesElement = document.createElement("div");
+const textInputElement = document.createElement("input");
+const formButton = document.createElement("button");
+const backButton = document.createElement("button");
+const clearButton = document.createElement("button");
 
 var highscores = {
   initials: "",
@@ -71,8 +71,8 @@ function init() {
 }
 function startGame() {
   startButton.remove();
-  textElement.remove();
-  timerElement = setInterval(function () {
+  //   textElement.remove();
+  timerInterval = setInterval(function () {
     secondsLeft--;
     timerElement.textContent = secondsLeft;
     if (secondsLeft <= 0) {
@@ -135,8 +135,58 @@ function renderQuiz(questionsNumber) {
   }
 }
 
+// function renderForm() {
+//   formElement.textContent = "Enter Username: ";
+//   formElement.setAttribute("style", "color: white");
+//   formButton.textContent = "Submit";
+//   mainElement.appendChild(formElement);
+//   formElement.appendChild(textInputElement);
+//   formElement.appendChild(formButton);
+// }
 
+// function submitHighscore() {
+//   var initialInput = document.querySelector("input").value;
+//   highscores.initials.initialInput;
+//   highscores.score = score;
+//   console.log(highscores);
+//   localStorage.setItem("highscore", JSON.stringify(highscore));
+//   mainElement.innerHTML = "";
+//   highScoreView.textContent = "";
+//   timerView.textContent = "";
 
+//   renderHighscores();
+// }
+
+// function renderHighscores() {
+//   var storeHighscore = JSON.parse(localStorage.getItem("highscore"));
+//   console.log(storeHighscore);
+//   messageElement.innerHTML = "Highscores";
+//   messageElement.setAttribute("stlye", "color: white");
+//   mainElement.appendChild(messageElement);
+//   console.log(storedHighscore.initials);
+//   console.log(storedHighscore.score);
+//   highscoresElement.setAttribute("class", "highscore-element");
+//   highscoresElement.textContent = `${storedHighscore.initials} - ${storedHighscore.score}`;
+//   messageElement.appendChild(highscoresElement);
+//   backButton.textContent = "Home";
+//   clearButton.textContent = "Clear";
+//   mainElement.append(backButton);
+//   mainElement.append(clearButton);
+// }
+
+function clear() {
+  highscorcesElement.remove();
+}
+
+function home() {
+  location.reload();
+}
+
+// highscorcesView.addEventListener("click", function () {
+//   textElement.remove();
+//   startButton.remove();
+//   renderHighscores();
+// });
 
 //ADD EVENT LISTENER
 startButton.addEventListener("click", startGame);
