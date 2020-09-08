@@ -1,6 +1,6 @@
 const timerElement = document.getElementById("time-remaining");
 const timerView = document.getElementById("timer");
-const highScoreView = document.querySelector("#highscores");
+const highScoreButton = document.querySelector("#highscores");
 const startButton = document.getElementById("start-quiz");
 
 const mainElement = document.querySelector("#main-content");
@@ -11,7 +11,6 @@ const choicesListElement = document.getElementById("choices-list");
 const indicatorElement = document.getElementById("indicator");
 
 const formElement = document.createElement("div");
-const highscoresElement = document.createElement("div");
 const textInputElement = document.createElement("input");
 const formButton = document.createElement("button");
 const backButton = document.createElement("button");
@@ -27,7 +26,7 @@ var timerInterval;
 
 var questions = [
   {
-    question: "Which answer is an incorrect way of defining a variable?",
+    question: "Which answer is a correct way of defining a variable?",
     choices: ["A. Javascript", "B. B = bob", "C. Document Object Model"],
     answer: 2,
   },
@@ -54,7 +53,7 @@ var questions = [
       "B. Document.querySelector()",
       "C. Hello World",
     ],
-    answer: 0,
+    answer: 1,
   },
   {
     question: "What is Scope in Programming?",
@@ -155,10 +154,21 @@ function submitHighscore() {
   var initialInput = document.querySelector("input").value;
   highscore.initials = initialInput;
   highscore.score = score;
-  // console.log(highscore);
+  console.log(highscore);
+
+  var currentResult =
+    JSON.parse(window.localStorage.getItem("highscore")) || [];
+
+  // var currentResult = JSON.parse(localStorage.getItem("highscore"));
+  // if (!currentResult) {
+  //   currentResult = [];
+  // }
+  console.log(typeof currentResult);
+  console.log(currentResult);
+  currentResult.push(highscore);
   localStorage.setItem("highscore", JSON.stringify(highscore));
   mainElement.innerHTML = "";
-  highScoreView.textContent = "";
+  // highScoreButton.textContent = "";
   timerView.textContent = "";
 
   renderHighscores();
@@ -166,15 +176,20 @@ function submitHighscore() {
 
 function renderHighscores() {
   var storedHighscore = JSON.parse(localStorage.getItem("highscore"));
-  // console.log(storedHighscore);
+  console.log(JSON.stringify(storedHighscore));
   messageElement.innerHTML = "Highscores";
   messageElement.setAttribute("style", "color: white");
   mainElement.appendChild(messageElement);
-  // console.log(storedHighscore.initials);
-  // console.log(storedHighscore.score);
-  highscoresElement.setAttribute("class", "highscore-element");
-  highscoresElement.textContent = `${storedHighscore.initials} - ${storedHighscore.score}`;
-  messageElement.appendChild(highscoresElement);
+
+  console.log(storedHighscore.initials);
+  console.log(storedHighscore.score);
+
+  for (var i = 0; i < storedHighscore.choices.length; i++) {
+    const highscoresElement = document.createElement("div");
+    highscoresElement.setAttribute("class", "highscore-element");
+    highscoresElement.textContent = `${storedHighscore[i].initials} - ${storedHighscore[i].score}`;
+    mainElement.appendChild(highscoresElement);
+  }
   backButton.textContent = "Home";
   clearButton.textContent = "Clear";
   mainElement.appendChild(backButton);
@@ -189,7 +204,7 @@ function home() {
   location.reload();
 }
 
-highScoreView.addEventListener("click", function () {
+highScoreButton.addEventListener("click", function () {
   textElement.remove();
   startButton.remove();
   renderHighscores();
