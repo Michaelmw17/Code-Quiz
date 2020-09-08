@@ -15,6 +15,10 @@ body {
   font-family: "Open Sans Condensed", sans-serif;
   color: white;
 }
+.navbar {
+  margin: 5px;
+  padding: 5px;
+}
 
 header {
   padding: 30px;
