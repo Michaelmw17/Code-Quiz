@@ -5,19 +5,19 @@ Code Quiz
 ## Contents
 
 <p>
-  The app is composed of 4 pages, index.html, javascript.js, License and style.css. It may contain images in the img folder
+  The app is composed of 3 pages, index.html, javascript.js and style.css. It may contain images in the img folder
 </p>
 
 ## User Story
 
 <p>
-  As a type of user, Quiz Game that functions on the click, with a highest score function with local storage.
+  As a type of user, Quiz Game that functions on the click, with a highest score stored with local storage.
 </p>
 
 ## Built With
 
 - [VScode](https://code.visualstudio.com/) - The editor of choice
-- [Terminal](https:///) - What would we do without our bash?
+- [Terminal](https:///) - What would we do without our bash
 
 #### Initial interface
 

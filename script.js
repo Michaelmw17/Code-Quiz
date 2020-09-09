@@ -52,7 +52,7 @@ var questions = [
       "B. Hello World ",
       "C. Document.querySelector()",
     ],
-    answer: 1,
+    answer: 2,
   },
   {
     question: "What is Scope in Programming?",
@@ -189,7 +189,7 @@ function renderHighscores() {
 }
 
 function clear() {
-  storedHighscore.remove();
+  location.reload();
 }
 
 function home() {
