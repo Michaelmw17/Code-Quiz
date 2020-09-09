@@ -20,7 +20,6 @@ var highscore = {
   initials: "",
   score: 0,
 };
-var highscores = [];
 var secondsLeft;
 var timerInterval;
 
@@ -28,7 +27,7 @@ var questions = [
   {
     question: "Which answer is a correct way of defining a variable?",
     choices: ["A. Javascript", "B. B = bob", "C. Document Object Model"],
-    answer: 2,
+    answer: 1,
   },
 
   {
@@ -43,26 +42,26 @@ var questions = [
 
   {
     question: "Who invented JavaScript?",
-    choices: ["B. A Cookie Company", "A. Dr Einstein", "C. Brendan Eich"],
-    answer: 2,
+    choices: ["A. A Cookie Company", "B. Brendan Eich", "C. Dr Einstein"],
+    answer: 1,
   },
   {
     question: "Which is a querySelector Method?",
     choices: [
       "A. Language.querySelector()",
-      "B. Document.querySelector()",
-      "C. Hello World",
+      "B. Hello World ",
+      "C. Document.querySelector()",
     ],
     answer: 1,
   },
   {
     question: "What is Scope in Programming?",
     choices: [
-      "A. Hyper Text Markup Language",
-      "B. A Mouth Wash",
-      "C. Refers to where values and functions can be accessed.",
+      "A. Refers to where values and functions can be accessed.",
+      "B. A Mouth Wash.",
+      "C. Hyper Text Markup Language.",
     ],
-    answer: 2,
+    answer: 0,
   },
 ];
 
@@ -127,7 +126,7 @@ function renderQuiz(questionNumber) {
         newChoices.remove();
         messageElement.textContent = "Game Over!";
         messageElement.appendChild(textElement);
-        textElement.textContent = "Your final score is: " + score;
+        textElement.textContent = "Your final score is: " + secondsLeft;
 
         renderForm();
       } else {
@@ -152,21 +151,17 @@ function renderForm() {
 
 function submitHighscore() {
   var initialInput = document.querySelector("input").value;
-  highscore.initials = initialInput;
-  highscore.score = score;
-  console.log(highscore);
+  highscore = {
+    initials: initialInput,
+    score: secondsLeft,
+  };
+  console.log("highscore", highscore);
 
   var currentResult =
     JSON.parse(window.localStorage.getItem("highscore")) || [];
-
-  // var currentResult = JSON.parse(localStorage.getItem("highscore"));
-  // if (!currentResult) {
-  //   currentResult = [];
-  // }
-  console.log(typeof currentResult);
-  console.log(currentResult);
   currentResult.push(highscore);
-  localStorage.setItem("highscore", JSON.stringify(highscore));
+  console.log(currentResult);
+  localStorage.setItem("highscore", JSON.stringify(currentResult));
   mainElement.innerHTML = "";
   // highScoreButton.textContent = "";
   timerView.textContent = "";
@@ -175,16 +170,13 @@ function submitHighscore() {
 }
 
 function renderHighscores() {
-  var storedHighscore = JSON.parse(localStorage.getItem("highscore"));
+  var storedHighscore = JSON.parse(localStorage.getItem("highscore")) || [];
+  console.log("local", storedHighscore);
   console.log(JSON.stringify(storedHighscore));
   messageElement.innerHTML = "Highscores";
   messageElement.setAttribute("style", "color: white");
   mainElement.appendChild(messageElement);
-
-  console.log(storedHighscore.initials);
-  console.log(storedHighscore.score);
-
-  for (var i = 0; i < storedHighscore.choices.length; i++) {
+  for (var i = 0; i < storedHighscore.length; i++) {
     const highscoresElement = document.createElement("div");
     highscoresElement.setAttribute("class", "highscore-element");
     highscoresElement.textContent = `${storedHighscore[i].initials} - ${storedHighscore[i].score}`;
@@ -197,7 +189,7 @@ function renderHighscores() {
 }
 
 function clear() {
-  highscoresElement.remove();
+  storedHighscore.remove();
 }
 
 function home() {
