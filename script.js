@@ -26,10 +26,7 @@ var timerInterval;
 var questions = [
   {
     question: "Which answer is a correct way of defining a variable?",
-    choices: [
-      "A. Javascript", 
-      "B. B = bob", 
-      "C. Document Object Model"],
+    choices: ["A. Javascript", "B. B = bob", "C. Document Object Model"],
     answer: 1,
   },
 
@@ -115,11 +112,11 @@ function renderQuiz(questionNumber) {
         parseInt(event.target.getAttribute("data-index"))
       ) {
         score += 5;
-        indicatorElement.innerHTML = "CORRECT!";
+        indicatorElement.innerHTML = "<hr> CORRECT!";
         indicatorElement.setAttribute("style", "color: lightgreen");
       } else {
         secondsLeft -= 5;
-        indicatorElement.innerHTML = "WRONG!";
+        indicatorElement.innerHTML = "<hr> WRONG!";
         indicatorElement.setAttribute("style", "color: red");
       }
 
@@ -165,7 +162,7 @@ function submitHighscore() {
 
   var currentResult =
     JSON.parse(window.localStorage.getItem("highscore")) || [];
-  currentResult.push(highscore);
+  // currentResult.push(highscore);
   console.log(currentResult);
   localStorage.setItem("highscore", JSON.stringify(currentResult));
   mainElement.innerHTML = "";
