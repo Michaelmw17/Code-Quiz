@@ -112,11 +112,11 @@ function renderQuiz(questionNumber) {
         parseInt(event.target.getAttribute("data-index"))
       ) {
         score += 5;
-        indicatorElement.innerHTML = "<hr> CORRECT!";
+        indicatorElement.innerHTML = " CORRECT!";
         indicatorElement.setAttribute("style", "color: lightgreen");
       } else {
         secondsLeft -= 5;
-        indicatorElement.innerHTML = "<hr> WRONG!";
+        indicatorElement.innerHTML = " WRONG!";
         indicatorElement.setAttribute("style", "color: red");
       }
 

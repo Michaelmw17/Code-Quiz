@@ -1,61 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Coding Quiz</title>
     <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@1,300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/53ee901694.js" crossorigin="anonymous"></script>
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@1,300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/53ee901694.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<body>
-
+  <body>
     <!-- Nav Bar For Score/Timer -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
-        <div class="container navbar-container">
-            <div class="row w-100">
-                <div class="col-4 col-md-2">
-                    <button type="button" id="highscores" class="btn btn-lg btn-outline-primary">Highest Scores<i class="fas fa-crown"></i
-                        ></button>
-                    </div>
-                <div class="col-3 col-md-7"></div>
-                <div class="col-5 col-md-3">
-
-                    <div class="form-group row">
-                        <label for="time-remaining" class="col-sm-7 col-form-label"></label>
-                        <div id="timer">Time Remaining: <span id="time-remaining">60</span></div>
-                    </div>
-
-                </div>
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light justify-content-center"
+    >
+      <div class="container navbar-container">
+        <div class="row w-100">
+          <div class="col-3 col-md-2">
+            <button
+              type="button"
+              id="highscores"
+              class="btn btn-lg btn-outline-primary"
+            >
+              Highest Scores<i class="fas fa-crown"></i>
+            </button>
+          </div>
+          <div class="col-2 col-md-6"></div>
+          <div class="col-4 col-md-2">
+            <div class="form-group row">
+              <label class="time-remaining" id="col-form-label"></label>
+              <div id="timer">
+                Time Remaining: <span id="time-remaining">60</span>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </nav>
 
     <!-- Main Question's Container -->
     <main id="main-content" class="container">
-        <div class="row mb-3">
-            <div class="card col-lg-12 text-center bg-transparent">
-                <div class="card-header">
-                    <h1>Welcome To Coding Quiz</h1>
-                    <p id="card-text">Answer quiz question's before the timer runs out!.</p>
-                    <br></br>
-                    <button id="start-quiz" class="btn-lg btn-outline-primary">Start the Quiz?</button>
-                    <ul id="choices-list"></ul>
-                    <div id="indicator"></div>
-                </div>
-            </div>
-        </div>
-    </main>
-    <div class="container">
-        <footer id="sticky-footer">
-          <small>Copyright &copy; Michael's Website</small>
-        </footer>
-      </div>
-    <!-- script.js tag -->
-    <script src="script.js"></script>
-</body>
+      <div class="row md-3">
+        <div class="card col-lg-12 text-center bg-transparent">
+          <div class="card-header">
+            <h1>Welcome To Coding Quiz</h1>
+            <p id="card-text">
+              Answer quiz question's before the timer runs out!.
+            </p>
 
+            <button id="start-quiz" class="btn-lg btn-outline-primary">
+              Start the Quiz?
+            </button>
+            <ul id="choices-list"></ul>
+            <div id="indicator"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!--  -->
+    <div class="container">
+      <footer id="sticky-footer">
+        <small>Copyright &copy; Michael's Website</small>
+      </footer>
+    </div>
+
+    <!--script.js tag -->
+    <script src="script.js"></script>
+  </body>
 </html>
