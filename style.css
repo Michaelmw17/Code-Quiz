@@ -68,3 +68,8 @@ li {
   padding-left: 30px;
   background-color: rgb(2, 194, 241);
 }
+#sticky-footer {
+  opacity: 40%;
+  margin-bottom: 15px;
+  color: white;
+}

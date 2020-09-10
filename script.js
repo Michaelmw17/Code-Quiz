@@ -14,7 +14,7 @@ const formElement = document.createElement("div");
 const textInputElement = document.createElement("input");
 const formButton = document.createElement("button");
 const backButton = document.createElement("button");
-const clearButton = document.createElement("button");
+// const clearButton = document.createElement("button");
 
 var highscore = {
   initials: "",
@@ -132,6 +132,7 @@ function renderQuiz(questionNumber) {
       } else {
         setTimeout(function () {
           renderQuiz(questionNumber);
+          // debugger;
           newChoices.remove();
           indicatorElement.textContent = "";
         }, 1000);
@@ -183,14 +184,14 @@ function renderHighscores() {
     mainElement.appendChild(highscoresElement);
   }
   backButton.textContent = "Home";
-  clearButton.textContent = "Clear";
+  // clearButton.textContent = "Clear";
   mainElement.appendChild(backButton);
-  mainElement.appendChild(clearButton);
+  // mainElement.appendChild(clearButton);
 }
 
-function clear() {
-  location.reload();
-}
+// function clear() {
+//   location.reload();
+// }
 
 function home() {
   location.reload();
@@ -205,4 +206,4 @@ highScoreButton.addEventListener("click", function () {
 startButton.addEventListener("click", startGame);
 formButton.addEventListener("click", submitHighscore);
 backButton.addEventListener("click", home);
-clearButton.addEventListener("click", clear);
+// clearButton.addEventListener("click", clear);
