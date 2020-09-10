@@ -105,15 +105,17 @@ function renderQuiz(questionNumber) {
     newChoices.appendChild(li);
 
     li.addEventListener("click", function (event) {
+      if (li.getAttribute("clicked") == "true") return;
+      li.setAttribute("clicked", "true");
       if (
         questionItem.answer ===
         parseInt(event.target.getAttribute("data-index"))
       ) {
-        score += 10;
+        score += 5;
         indicatorElement.innerHTML = "<hr> CORRECT!";
         indicatorElement.setAttribute("style", "color: lightgreen");
       } else {
-        secondsLeft -= 10;
+        secondsLeft -= 5;
         indicatorElement.innerHTML = "<hr> WRONG!";
         indicatorElement.setAttribute("style", "color: red");
       }
@@ -207,3 +209,4 @@ startButton.addEventListener("click", startGame);
 formButton.addEventListener("click", submitHighscore);
 backButton.addEventListener("click", home);
 // clearButton.addEventListener("click", clear);
+//

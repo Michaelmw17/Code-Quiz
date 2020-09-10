@@ -16,8 +16,8 @@ Code Quiz
 
 ## Built With
 
-- [VScode](https://code.visualstudio.com/) - The editor of choice
-- [Terminal](https:///) - What would we do without our bash
+- [VScode](https://code.visualstudio.com/) - The editor of choice.
+- [Terminal](https:///) - What would we do without our bash.
 
 #### Initial interface
 
