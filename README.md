@@ -44,7 +44,7 @@ https://github.com/Michaelmw17/w4homework/blob/master/LICENSE
 - **FIRST LAST** -
   Michael Watt
 
-michaaelmw17@outlook.com
+michaelmw17@outlook.com
 
 ## Acknowledgments/Sources
 
