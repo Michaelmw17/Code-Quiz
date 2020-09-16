@@ -1,212 +1,112 @@
-const timerElement = document.getElementById("time-remaining");
-const timerView = document.getElementById("timer");
-const highScoreButton = document.querySelector("#highscores");
-const startButton = document.getElementById("start-quiz");
+const question = document.querySelector("#question");
+const choices = Array.from(document.querySelectorAll(".choice-text"));
+const progressText = document.querySelector("#progressText");
+const scoreText = document.querySelector("#score");
+const progressBarFull = document.querySelector("#progressBarFull");
 
-const mainElement = document.querySelector("#main-content");
-const messageElement = document.querySelector("h1");
-const textElement = document.querySelector("p");
+let currentQuestion = {};
+let acceptingAnswers = true;
+let score = 0;
+let questionCounter = 0;
+let availableQuestions = [];
 
-const choicesListElement = document.getElementById("choices-list");
-const indicatorElement = document.getElementById("indicator");
-
-const formElement = document.createElement("div");
-const textInputElement = document.createElement("input");
-const formButton = document.createElement("button");
-const backButton = document.createElement("button");
-// const clearButton = document.createElement("button");
-
-var highscore = {
-  initials: "",
-  score: 0,
-};
-var secondsLeft;
-var timerInterval;
-
-var questions = [
+let questions = [
   {
     question: "Which answer is a correct way of defining a variable?",
-    choices: ["A. Javascript", "B. B = bob", "C. Document Object Model"],
-    answer: 1,
-  },
-
-  {
-    question: "How do you add an Event Listener?",
-    choices: [
-      "A. input.addEventListener('click', function)",
-      "B. Beat up scooter!",
-      "C. Both are correct",
-    ],
-    answer: 0,
-  },
-
-  {
-    question: "Who invented JavaScript?",
-    choices: ["A. A Cookie Company", "B. Brendan Eich", "C. Dr Einstein"],
-    answer: 1,
-  },
-  {
-    question: "Which is a querySelector Method?",
-    choices: [
-      "A. Language.querySelector()",
-      "B. Hello World ",
-      "C. Document.querySelector()",
-    ],
+    choice1: "A. Javascript",
+    choice2: "B. B = bob",
+    choice3: "C. Document Object Model",
+    choice4: "None of the above",
     answer: 2,
   },
   {
-    question: "What is Scope in Programming?",
-    choices: [
-      "A. Refers to where values and functions can be accessed.",
-      "B. A Mouth Wash.",
-      "C. Hyper Text Markup Language.",
-    ],
-    answer: 0,
+    question: "How do you add an Event Listener?",
+    choice1: "A. input.addEventListener('click', function)",
+    choice2: "B. Beat up scooter!",
+    choice3: "C. Both are correct",
+    choice4: "None of the above",
+    answer: 1,
+  },
+  {
+    question: "Who invented JavaScript?",
+    choice1: "A. A Cookie Company",
+    choice2: "B. Brendan Eich",
+    choice3: "C. Dr Einstein",
+    choice4: "None of the above",
+    answer: 2,
+  },
+  {
+    question: "Which is a querySelector Method?",
+    choice1: "A. Language.querySelector()",
+    choice2: "B. Hello World",
+    choice3: "C. Document.querySelector()",
+    choice4: "None of the above",
+    answer: 3,
   },
 ];
 
-// FUNCTIONS
-init();
+const SCORE_POINTS = 100;
+const MAX_QUESTIONS = 4;
 
-function init() {
+startGame = () => {
+  questionCounter = 0;
   score = 0;
-  secondsLeft = 60;
-}
+  availableQuestions = [...questions];
+  getNewQuestion();
+};
 
-function startGame() {
-  startButton.remove();
-  textElement.remove();
-  timerInterval = setInterval(function () {
-    secondsLeft--;
-    timerElement.textContent = secondsLeft;
+getNewQuestion = () => {
+  if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
+    localStorage.setItem("mostRecentScore", score);
 
-    if (secondsLeft <= 0) {
-      clearInterval(timerInterval);
+    return window.location.assign("/end.html");
+  }
+
+  questionCounter++;
+  progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`;
+  progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
+
+  const questionsIndex = Math.floor(Math.random() * availableQuestions.length);
+  currentQuestion = availableQuestions[questionsIndex];
+  question.innerText = currentQuestion.question;
+
+  choices.forEach((choice) => {
+    const number = choice.dataset["number"];
+    choice.innerText = currentQuestion["choice" + number];
+  });
+
+  availableQuestions.splice(questionsIndex, 1);
+
+  acceptingAnswers = true;
+};
+
+choices.forEach((choice) => {
+  choice.addEventListener("click", (e) => {
+    if (!acceptingAnswers) return;
+
+    acceptingAnswers = false;
+    const selectedChoice = e.target;
+    const selectedAnswer = selectedChoice.dataset["number"];
+
+    let classToApply =
+      selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+
+    if (classToApply === "correct") {
+      incrementScore(SCORE_POINTS);
     }
-  }, 1000);
 
-  renderQuiz();
-}
+    selectedChoice.parentElement.classList.add(classToApply);
 
-function renderQuiz(questionNumber) {
-  questionNumber = questionNumber || 0;
-  var questionItem = questions[questionNumber];
-  messageElement.textContent = questionItem.question;
-
-  var newChoices = document.createElement("div");
-  choicesListElement.appendChild(newChoices);
-
-  for (var i = 0; i < questionItem.choices.length; i++) {
-    var choice = questionItem.choices[i];
-
-    var li = document.createElement("li");
-    li.setAttribute("data-index", i);
-    li.textContent = choice;
-    newChoices.appendChild(li);
-
-    li.addEventListener("click", function (event) {
-      if (li.getAttribute("clicked") == "true") return;
-      li.setAttribute("clicked", "true");
-      if (
-        questionItem.answer ===
-        parseInt(event.target.getAttribute("data-index"))
-      ) {
-        score += 10;
-        indicatorElement.innerHTML = " CORRECT!";
-        indicatorElement.setAttribute("style", "color: lightgreen");
-      } else {
-        secondsLeft -= 10;
-        indicatorElement.innerHTML = " WRONG!";
-        indicatorElement.setAttribute("style", "color: red");
-      }
-
-      questionNumber++;
-
-      if (questionNumber === questions.length) {
-        clearInterval(timerInterval);
-        indicatorElement.textContent = "";
-        newChoices.remove();
-        messageElement.textContent = "Game Over!";
-        messageElement.appendChild(textElement);
-        textElement.textContent = "Your final score is: " + secondsLeft;
-
-        renderForm();
-      } else {
-        setTimeout(function () {
-          renderQuiz(questionNumber);
-          // debugger;
-          newChoices.remove();
-          indicatorElement.textContent = "";
-        }, 1000);
-      }
-    });
-  }
-}
-
-function renderForm() {
-  formElement.textContent = "ENTER NAME: ";
-  formElement.setAttribute("style", "color: white");
-  formButton.textContent = "SUBMIT";
-  mainElement.appendChild(formElement);
-  formElement.appendChild(textInputElement);
-  formElement.appendChild(formButton);
-}
-
-function submitHighscore() {
-  var initialInput = document.querySelector("input").value;
-  highscore = {
-    initials: initialInput,
-    score: secondsLeft,
-  };
-  console.log("highscore", highscore);
-
-  var currentResult =
-    JSON.parse(window.localStorage.getItem("highscore")) || [];
-  // currentResult.push(highscore);
-  console.log(currentResult);
-  localStorage.setItem("highscore", JSON.stringify(currentResult));
-  mainElement.innerHTML = "";
-  // highScoreButton.textContent = "";
-  timerView.textContent = "";
-
-  renderHighscores();
-}
-
-function renderHighscores() {
-  var storedHighscore = JSON.parse(localStorage.getItem("highscore")) || [];
-  console.log("local", storedHighscore);
-  console.log(JSON.stringify(storedHighscore));
-  messageElement.innerHTML = "Highscores";
-  messageElement.setAttribute("style", "color: white");
-  mainElement.appendChild(messageElement);
-  for (var i = 0; i < storedHighscore.length; i++) {
-    const highscoresElement = document.createElement("div");
-    highscoresElement.setAttribute("class", "highscore-element");
-    highscoresElement.textContent = `${storedHighscore[i].initials} - ${storedHighscore[i].score}`;
-    mainElement.appendChild(highscoresElement);
-  }
-  backButton.textContent = "Home";
-  // clearButton.textContent = "Clear";
-  mainElement.appendChild(backButton);
-  // mainElement.appendChild(clearButton);
-}
-
-// function clear() {
-//   location.reload();
-// }
-
-function home() {
-  location.reload();
-}
-
-highScoreButton.addEventListener("click", function () {
-  textElement.remove();
-  startButton.remove();
-  renderHighscores();
+    setTimeout(() => {
+      selectedChoice.parentElement.classList.remove(classToApply);
+      getNewQuestion();
+    }, 1000);
+  });
 });
 
-startButton.addEventListener("click", startGame);
-formButton.addEventListener("click", submitHighscore);
-backButton.addEventListener("click", home);
-// clearButton.addEventListener("click", clear);
-//
+incrementScore = (num) => {
+  score += num;
+  scoreText.innerText = score;
+};
+
+startGame();

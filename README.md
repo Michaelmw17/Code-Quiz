@@ -3,13 +3,11 @@
 Code Quiz
 
 ## Contents
-
 <p>
   The app is composed of 3 pages, index.html, javascript.js and style.css. It may contain images in the img folder
 </p>
 
 ## User Story
-
 <p>
   As a type of user, Quiz Game that functions on the click, with a highest score stored with local storage.
 </p>
