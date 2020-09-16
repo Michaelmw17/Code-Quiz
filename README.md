@@ -3,13 +3,15 @@
 Code Quiz
 
 ## Contents
+
 <p>
-  The app is composed of 3 pages, index.html, javascript.js and style.css. It may contain images in the img folder
+  The app is composed of 2 sets 3 pages each .html, .js and .css. as well as an end.html and end.js. It may contain images in the img folder
 </p>
 
 ## User Story
+
 <p>
-  As a type of user, Quiz Game that functions on the click, with a highest score stored with local storage.
+  As a type of user, Quiz Game that functions on the click, with a highest score stored with local storage. and not be able to save score without a entered username
 </p>
 
 ## Built With
@@ -22,10 +24,6 @@ Code Quiz
 <hr>
 
 <img src="./img/w4homework.png">
-
-#### Final Interface
-
--
 
 ### Licence
 
