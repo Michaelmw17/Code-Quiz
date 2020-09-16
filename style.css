@@ -9,7 +9,7 @@
   font-size: 62.5%;
   font-family: "Space Mono", monospace;
 }
-/* body {
+body {
   margin: 0 auto;
   text-align: center;
   background-repeat: no-repeat;
@@ -17,9 +17,8 @@
   background-position: center;
   background-image: url(https://img.freepik.com/free-vector/blue-cyber-future-technology-concept-background_42077-488.jpg?size=626&ext=jpg);
   background-size: cover;
-  font-family: "Inter", sans-serif;
   color: white;
-} */
+}
 h1 {
   font-size: 42px;
   color: #fff;
