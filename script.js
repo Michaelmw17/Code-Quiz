@@ -10,6 +10,8 @@ let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
 
+/*Questions*/
+
 let questions = [
   {
     question: "Which answer is a correct way of defining a variable?",
