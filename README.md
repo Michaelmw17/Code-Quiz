@@ -4,34 +4,30 @@ Code Quiz
 
 ## Contents
 
-<p>
   The app is composed of 2 sets 3 pages each .html, .js and .css. as well as an end.html and end.js. It may contain images in the img folder
-</p>
 
 ## User Story
 
-<p>
   As a type of user, Quiz Game that functions on the click, with a highest score stored with local storage. and not be able to save score without a entered username
-</p>
 
 ## Built With
 
 - [VScode](https://code.visualstudio.com/) - The editor of choice.
 - [Terminal](https:///) - What would we do without our bash.
 
-#### Initial interface
+## Initial interface
 
-<hr>
+<hr/>
 
-<img src="./img/w4homework.png">
+<img src="./images/w4homework.png">
 
 ### Licence
 
 https://github.com/Michaelmw17/w4homework/blob/master/LICENSE
 
-### Link to the App
+### Links
 
-<a href=".">https://michaelmw17.github.io/w4homework/</a><hr>
+<a href="https://github.com/Michaelmw17/Code-Quiz">Github</a>
 
 <hr>
 
@@ -47,6 +43,7 @@ michaelmw17@outlook.com
 - textContent vs innerHTML/innerText
 
   - https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
+  
   - https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent#Differences_from_innerText
 
 - Local Storage
